@@ -1,8 +1,8 @@
 import { inventario } from '../services/inventario.js'
 import { envios } from '../services/envios.js'
 import { notificaciones } from '../services/notificaciones.js'
-import { retry } from '../services/retry.js'
-import { CircuitBreaker } from '../services/CircuitBreaker.js'
+import { retry } from './retry.js'
+import { CircuitBreaker } from './CircuitBreaker.js'
 
 // Instancia global del CircuitBreaker para conservar el estado (CERRADO, ABIERTO, SEMI-ABIERTO)
 // a lo largo de múltiples pedidos.
