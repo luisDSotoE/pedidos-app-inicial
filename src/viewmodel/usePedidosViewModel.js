@@ -16,14 +16,13 @@ export function usePedidosViewModel() {
     direccion: '',
     itemsText: '',
     total: '',
-    pasarela: 'X'
+    pasarela: 'X',
   })
 
-  // 2. Crear la función setField solicitada
   const setField = (field, value) => {
     setForm((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }))
   }
 
@@ -31,25 +30,25 @@ export function usePedidosViewModel() {
     e.preventDefault()
     setError(null)
     setLoading(true)
-    
+
     try {
       const adapter = form.pasarela === 'X' ? new AdapterPasarelaX() : new AdapterPasarelaY()
       const facade = new FachadaPedidos(adapter)
-      
+
       const pedido = {
         cliente: form.cliente,
         direccion: form.direccion,
         items: form.itemsText.split(',').map((s) => s.trim()).filter(Boolean),
         total: Number(form.total),
       }
-      
+
       await facade.procesarPedido(pedido)
-      
+
       setPedidos((prev) => [
         { ...pedido, pasarela: form.pasarela, procesadoEn: new Date().toLocaleTimeString() },
         ...prev,
       ])
-      
+
       setForm({ cliente: '', direccion: '', itemsText: '', total: '', pasarela: 'X' })
     } catch (err) {
       setError(err.message)
@@ -64,6 +63,6 @@ export function usePedidosViewModel() {
     error,
     form,
     setField,
-    enviarPedido
+    enviarPedido,
   }
 }

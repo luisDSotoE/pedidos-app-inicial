@@ -1,35 +1,45 @@
 /**
  * EJERCICIO 3 — MVVM: Vista
  *
- * Componente de presentación PURO: solo recibe props y renderiza JSX.
- * No debe tener useState, useEffect, ni conocer FachadaPedidos ni los
- * Adapters — toda esa lógica vive en usePedidosViewModel.
- *
- * Props esperadas (mismo contrato que devuelve el hook):
- *   { pedidos, loading, error, form, setField, enviarPedido }
+ * Componente de presentación PURO.
  */
 export default function OrdersView({ pedidos, loading, error, form, setField, enviarPedido }) {
-  // TODO(Ejercicio 3): mover aquí el JSX de OrdersApp.jsx, reemplazando
-  // el estado local (useState) por las props recibidas del ViewModel.
   return (
     <section className="orders">
       <form onSubmit={enviarPedido} className="orders-form">
         <h2>Nuevo pedido</h2>
         <label>
           Cliente
-          <input value={form.cliente} onChange={(e) => setField('cliente', e.target.value)} required />
+          <input
+            value={form.cliente}
+            onChange={(e) => setField('cliente', e.target.value)}
+            required
+          />
         </label>
         <label>
           Dirección
-          <input value={form.direccion} onChange={(e) => setField('direccion', e.target.value)} required />
+          <input
+            value={form.direccion}
+            onChange={(e) => setField('direccion', e.target.value)}
+            required
+          />
         </label>
         <label>
           Items (separados por coma)
-          <input value={form.itemsText} onChange={(e) => setField('itemsText', e.target.value)} required />
+          <input
+            value={form.itemsText}
+            onChange={(e) => setField('itemsText', e.target.value)}
+            required
+          />
         </label>
         <label>
           Total
-          <input type="number" value={form.total} onChange={(e) => setField('total', e.target.value)} required />
+          <input
+            type="number"
+            value={form.total}
+            onChange={(e) => setField('total', e.target.value)}
+            required
+          />
         </label>
         <label>
           Pasarela de pago
@@ -58,5 +68,4 @@ export default function OrdersView({ pedidos, loading, error, form, setField, en
       </div>
     </section>
   )
-  return <p>TODO: implementar OrdersView usando las props del ViewModel</p>
 }
