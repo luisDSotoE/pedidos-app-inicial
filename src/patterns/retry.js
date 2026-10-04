@@ -20,7 +20,7 @@ export async function retry(fn, { intentos = 3, esperaMs = 300 } = {}) {
       return await fn()
     } catch (error) {
       ultimoError = error
-
+      console.log(`Intento ${intento}`)
       // Si ya alcanzamos el número máximo de intentos, no esperamos más
       if (intento === intentos) {
         break

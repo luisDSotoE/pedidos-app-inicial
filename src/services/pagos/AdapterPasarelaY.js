@@ -1,25 +1,22 @@
-
-import { Resultado } from './IPago'; // Asegúrate de tener esta importación correcta según tu proyecto
+import { Resultado } from './IPago.js'
+import { SdkPasarelaY } from './SdkPasarelaY.js'
 
 export class AdapterPasarelaY {
-  constructor(sdk) {
-    this.sdk = sdk; // Asumiendo que el SDK se inyecta o se instancia aquí
+  constructor(sdk = new SdkPasarelaY()) {
+    this.sdk = sdk
   }
 
   async procesar(monto) {
     try {
-      // 1. Convertir el monto (unidades) a centavos
-      const centavos = Math.round(monto * 100);
-
-      // 2. Llamar al sdk con los centavos y la moneda especificada
-      const resultado = await this.sdk.charge(centavos, { currency: 'COP' });
-
-      // 4. Si tiene éxito, devolver Resultado true con el ID de transacción
-      return new Resultado(true, resultado.txId);
+      // 1 y 2. Convertir a centavos y llamar a charge(amountCents, opts)
+      const centavos = Math.round(monto * 100)
+      const respuesta = await this.sdk.charge(centavos, { currency: 'COP' })
       
+      // 4. Si tiene éxito, devolver Resultado(true, txId)
+      return new Resultado(true, respuesta.txId)
     } catch (error) {
-      // 3. Si la llamada falla o se rechaza, devolver Resultado(false, null)
-      return new Resultado(false, null);
+      // 3. Si la llamada falla / rechaza la promesa, devolver Resultado(false, null)
+      return new Resultado(false, null)
     }
   }
 }

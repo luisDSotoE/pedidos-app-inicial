@@ -51,7 +51,7 @@ export default function OrdersView({ pedidos, loading, error, form, setField, en
         <button type="submit" disabled={loading}>
           {loading ? 'Procesando…' : 'Procesar pedido'}
         </button>
-        {error && <p className="error">⚠️ {error}</p>}
+        {error && <p className="error"> {error}</p>}
       </form>
 
       <div className="orders-list">
